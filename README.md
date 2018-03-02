@@ -1,5 +1,5 @@
 # InciManager_i3a
-Incident manager module i3a
+[![CircleCI](https://circleci.com/gh/Arquisoft/InciManager_i3a/tree/master.svg?style=svg)](https://circleci.com/gh/Arquisoft/InciManager_i3a/tree/master)
 
 **Welcome to our Incident Manager module**
  
