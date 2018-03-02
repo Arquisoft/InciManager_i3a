@@ -1,0 +1,117 @@
+# Configuration file for pull aprove
+# in the ASW Subject from University
+# of Oviedo.
+#
+#
+# Author Guillermo Facundo Colunga.
+
+
+version: 2
+
+group_defaults:
+  required: 1
+  reset_on_reopened:
+    enabled: true
+  reset_on_push:
+      enabled: true
+  reset_on_reopened:
+      enabled: true
+  approve_by_comment:
+    enabled: false
+  # see http://docs.pullapprove.com/groups/author_approval/
+  author_approval:
+    # If the author is a reviewer on the PR, they will automatically have an "approved" status.
+    auto: true
+
+always_pending:
+  title_regex: '(WIP|wip)'
+  labels:
+    - "status: wip"
+  # custom message that will be used for the GitHub status
+  explanation: 'This PR is a work in progress...'
+
+groups:
+
+  all:
+    users: all
+    required: 0
+    rejection_value: -999
+    # In this group, your self-approval does not count
+    author_approval:
+      auto: false
+      ignored: true
+    conditions:
+      files:
+        include:
+          - "*"
+
+  master-reviewrs:
+    users:
+      - thewilly
+    required: 1
+    # In this group, your self-approval does count
+    author_approval:
+      auto: true
+      ignored: false
+    conditions:
+      branches:
+        - master  # this group only reviews when PR is merging into master
+      files:
+        include:
+          - "*"
+
+  testers:
+    users:
+      - thewilly
+    required: 1
+    # In this group, your self-approval does count
+    author_approval:
+      auto: true
+      ignored: false
+    conditions:
+      files:
+        include:
+          - "/src/test/*"
+
+  continuos-integration:
+    users:
+      - thewilly
+    required: 1
+    # In this group, your self-approval does count
+    author_approval:
+      auto: true
+      ignored: false
+    conditions:
+      files:
+        include:
+          - ".circleci/*"
+          - ".travis.yml"
+
+  github-gurus:
+    users:
+      - thewilly
+    required: 1
+    # In this group, your self-approval does count
+    author_approval:
+      auto: true
+      ignored: false
+    conditions:
+      files:
+        include:
+          - ".github/*"
+          - ".gitignore"
+          - "*.md"
+          - "LICENSE"
+
+  dependency-managers:
+    users:
+      - thewilly
+    required: 1
+    # In this group, your self-approval does count
+    author_approval:
+      auto: true
+      ignored: false
+    conditions:
+      files:
+        include:
+          - "pom.xml"
