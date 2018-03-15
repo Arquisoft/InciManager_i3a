@@ -1,4 +1,4 @@
-package org.uniovi.asw.inci_manager;
+package org.uniovi.asw.inci_manager.kafka;
 
 /**
  * Hello world!

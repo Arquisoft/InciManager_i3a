@@ -1,5 +1,8 @@
-package org.uniovi.asw.inci_manager;
+package org.uniovi.asw.inci_manager.web;
 
+import org.junit.experimental.categories.Category;
+
+import TestKit.UnitTest;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -7,6 +10,7 @@ import junit.framework.TestSuite;
 /**
  * Unit test for simple App.
  */
+@Category(UnitTest.class)
 public class AppTest extends TestCase {
     /**
      * Create the test case
