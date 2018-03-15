@@ -28,12 +28,6 @@
 	<dependencies>
 
 		<dependency>
-			<groupId>org.uniovi.asw</groupId>
-			<artifactId>rest-service</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-
-		<dependency>
 			<groupId>com.github.computer-engineering-uniovi</groupId>
 			<artifactId>swift</artifactId>
 			<version>1.2</version>
