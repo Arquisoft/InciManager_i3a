@@ -13,6 +13,8 @@ local.properties
 .recommenders
 *.class
 
+target/
+
 # Eclipse Core
 .project
 

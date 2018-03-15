@@ -11,20 +11,20 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      - run: mvn clean install
+      - run: cd inci-manager; mvn clean install
       - run: bash <(curl -s https://codecov.io/bash)
 
   unit-tests:
     <<: *defaults
     steps:
       - checkout
-      - run: mvn test -Dgroups="categories.UnitTest"
+      - run: cd inci-manager; mvn test -Dgroups="categories.UnitTest";
 
   integration-tests:
     <<: *defaults
     steps:
       - checkout
-      - run: mvn test -Dgroups="categories.IntegrationTest"
+      - run: cd inci-manager; mvn test -Dgroups="categories.IntegrationTest";
 
 workflows:
   version: 2
