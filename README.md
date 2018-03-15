@@ -1,5 +1,6 @@
 # InciManager_i3a
 [![CircleCI](https://circleci.com/gh/Arquisoft/InciManager_i3a/tree/master.svg?style=svg)](https://circleci.com/gh/Arquisoft/InciManager_i3a/tree/master)
+[![codecov](https://codecov.io/gh/Arquisoft/InciManager_i3a/branch/master/graph/badge.svg)](https://codecov.io/gh/Arquisoft/InciManager_i3a)
 
 **Welcome to our Incident Manager module**
  
