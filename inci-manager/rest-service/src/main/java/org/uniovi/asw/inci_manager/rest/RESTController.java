@@ -12,6 +12,7 @@ package org.uniovi.asw.inci_manager.rest;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -31,14 +32,17 @@ import com.mashape.unirest.http.JsonNode;
  */
 @RestController
 public class RESTController {
+	
+	@Autowired
+	AgentsConnection agentsConnection;
 
 	@RequestMapping(value = "/sensor-feed", method = RequestMethod.POST, consumes = {
 			MediaType.APPLICATION_JSON_VALUE }, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> processSensorRequest( @RequestBody Map<String, Object> payload ) {
-
+		
 		// Authentication of the agent that made the request.
 		HttpResponse<JsonNode> authenticationResponse = 
-				new AgentsConnection()
+				agentsConnection
 				.executeQuery( new AgentsQueryFormatter( payload ).query() );
 		
 		if(authenticationResponse.getStatus() != HttpStatus.OK.value()) {
