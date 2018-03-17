@@ -38,29 +38,28 @@ import TestKit.IntegrationTest;
 @Category(IntegrationTest.class)
 public class RESTControllerTest {
 
-    @Autowired
-    private WebApplicationContext context;
-    private MockHttpSession session;
-    private MockMvc mockMvc;
+	@Autowired
+	private WebApplicationContext context;
+	private MockHttpSession session;
+	private MockMvc mockMvc;
 
-    private static final String QUERY_STRING = "{\"login\":\"%s\", \"password\":\"%s\", \"kind\":\"%s\", \"message\":\"%s\"}";
-    
-    @Before
-    public void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 
-	this.mockMvc = MockMvcBuilders.webAppContextSetup(this.context).build();
+		this.mockMvc = MockMvcBuilders.webAppContextSetup( this.context ).build();
 
-	session = new MockHttpSession();
-    }
-    
-    @Test
-    public void restTest() throws Exception {
-	String payload = String.format(QUERY_STRING, "", "", 3, "");
-	
-	// We send a POST request to that URI (from http:localhost...)
-	MockHttpServletRequestBuilder request = post("/sensor-feed").session(session).contentType(MediaType.APPLICATION_JSON)
-		.content(payload.getBytes());
-	mockMvc.perform(request).andExpect(status().isOk());
-    }
+		session = new MockHttpSession();
+	}
+
+	@Test
+	public void restTest() throws Exception {
+		String payload = "{\"login\":\"45170000A\",\"password\":\"4[[j[frVCUMJ>hU\",\"kind\":1,\"message\":{\"name\":\"Fuego en coto carcedo\",\"description\":\"Hay un fuego que se ha iniciado cerca del monte. Peligro para la población cercana\",\"tags\":[\"la\",\"le\",\"li\",\"lo\"],\"multimedia\":[\"www.imagen1.com\",\"www.imagen2.com\",\"www.imagen3.com\",\"www.imagen4.com\"],\"property-val\":{\"prop1\":\"val1\",\"prop2\":\"val2\",\"prop3\":\"val3\",\"prop4\":\"val4\"},\"comments\":[\"Please help!\"]}}";
+
+		// We send a POST request to that URI (from http:localhost...)
+		MockHttpServletRequestBuilder request = post( "/sensor-feed" ).session( session )
+				.contentType( MediaType.APPLICATION_JSON )
+				.content( payload.getBytes() );
+		mockMvc.perform( request ).andExpect( status().isOk() );
+	}
 
 }
