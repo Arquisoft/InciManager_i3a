@@ -30,7 +30,7 @@ import TestKit.IntegrationTest;
 /**
  * Instance of RestControllerTest.java
  * 
- * @author
+ * @author Guillermo Facundo Colunga
  * @version
  */
 @SpringBootTest(classes = { Application.class })
