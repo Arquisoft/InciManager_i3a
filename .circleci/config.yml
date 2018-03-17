@@ -39,7 +39,7 @@ jobs:
       - run:
           command: cd Agents_i3a-0.1/; mvn spring-boot:run;
           background: true
-      - run: cd inci-manager; mvn test -Dgroups="TestKit.IntegrationTest";
+      - run: sleep 30; cd inci-manager; mvn test -Dgroups="TestKit.IntegrationTest";
 
 workflows:
   version: 2
