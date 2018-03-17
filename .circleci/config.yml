@@ -11,7 +11,12 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      - run: cd inci-manager; mvn clean install
+      - run: wget https://github.com/Arquisoft/Agents_i3a/archive/v0.1.zip
+      - run: unzip v0.1.zip
+      - run:
+          command: cd Agents_i3a-0.1/; mvn spring-boot:run;
+          background: true
+      - run: sleep 30; cd inci-manager; mvn clean install
       - run: bash <(curl -s https://codecov.io/bash)
 
   unit-tests:
