@@ -9,6 +9,11 @@
  */
 package org.uniovi.asw.inci_manager.rest;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Service;
+
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
@@ -20,16 +25,15 @@ import com.mashape.unirest.http.exceptions.UnirestException;
  * @author
  * @version
  */
+@Service
 public class AgentsConnection {
 
-	private static final String SERVICE_URL = "http://localhost:8080/user";
-
-	public AgentsConnection() {
-	}
+	@Value("${agents.url}")
+	private String service_url;
 
 	public HttpResponse<JsonNode> executeQuery(String query) {
 		try {
-			HttpResponse<JsonNode> jsonResponse = Unirest.post( SERVICE_URL )
+			HttpResponse<JsonNode> jsonResponse = Unirest.post( service_url )
 					.header( "Content-Type", "application/json" )
 					.body( query )
 					.asJson();
