@@ -10,8 +10,8 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @SpringBootApplication
 @ComponentScan(basePackages= {"org.uniovi.asw.inci_manager.rest"})
-public class Application {
-    public static void main(String[] args) {
-	SpringApplication.run(Application.class, args);
-    }
+public class StartupREST {
+	public static void main( String[] args ) {
+		SpringApplication.run(StartupREST.class, args);
+	}
 }

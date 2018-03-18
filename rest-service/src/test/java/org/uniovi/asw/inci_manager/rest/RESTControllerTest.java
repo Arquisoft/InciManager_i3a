@@ -34,7 +34,7 @@ import TestKit.IntegrationTest;
  * @author Guillermo Facundo Colunga
  * @version
  */
-@SpringBootTest(classes = { Application.class })
+@SpringBootTest(classes = { StartupREST.class })
 @RunWith(SpringJUnit4ClassRunner.class)
 @Category(IntegrationTest.class)
 @ActiveProfiles("test")
