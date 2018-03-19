@@ -16,7 +16,7 @@ jobs:
       - run:
           command: cd Agents_i3a-0.1/; mvn spring-boot:run;
           background: true
-      - run: sleep 30; mvn clean install
+      - run: sleep 120; mvn clean install
       - run: bash <(curl -s https://codecov.io/bash)
 
   unit-tests:
