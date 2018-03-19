@@ -17,17 +17,13 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.uniovi.i3a.incimanager.rest.AgentsQueryFormatter;
 import org.uniovi.i3a.incimanager.rest.AgentsConnection;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
-
-import net.minidev.json.JSONObject;
 
 /**
  * Instance of WebLoginController.java
