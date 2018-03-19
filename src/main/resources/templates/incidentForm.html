@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8" />
+  <!-- to use the latest rendering engine in case it doesn't-->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <!-- Adjusts the viewport and the scale of the browser -->
+  <meta name="viewport" content="width = device-width, initial-scale = 1" />
+
+  <!-- Bootstrap CDN in order to have support for Bootstrap's CSS and js -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <!-- in order to include tether for BS 4 -->
+  <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+
+  <link rel="stylesheet" href="signin.css" />
+  <title>Login</title>
+
+</head>
+
+<body>
+
+  <!-- container class in order to tell BS to treat it as a container and it is usually container -->
+  <div class="container">
+    <form action="#" th:action="@{/incident}" id="Datos" class="form-incident" method="post">
+      <h2>Incident</h2>
+      <input id="IncidenceName" name="IncidenceName" type="text" class="form-control" placeholder="Incident Name" />
+      <input id="description" name="description" type="text" class="form-control" placeholder="Description" />
+      <input id="assignee" name="assignee" type="text" class="form-control" placeholder="Assignee" />
+      <input id="expiration" name="expiration" type="text" class="form-control" placeholder="Expiration" />
+      <input id="state" name="state" type="text" class="form-control" placeholder="State" />
+      <input id="tags" name="tags" type="text" class="form-control" placeholder="Tags-> fuego,peligro,poblacion" />
+      <input id="additional_information" name="additional_information" type="text" class="form-control" placeholder="Additional Informatiobn-> www.imagen1.com,www.imagen2.com" />
+      <input id="properties" name="properties" type="text" class="form-control" placeholder="Properties-> prop1:value1,prop2:value2,prop3:value3" />
+      <button id="Enter" name="Enter" type="submit" value="enter" class="btn btn-block btn-primary btn-lg">Enter </button>
+    </form>
+
+  </div>
+
+</body>
+
+</html>
