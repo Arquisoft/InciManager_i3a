@@ -7,7 +7,7 @@
  * See /LICENSE for license information.
  * 
  */
-package org.uniovi.i3a.incimanager.rest;
+package org.uniovi.i3a.incimanager.web;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -33,14 +33,14 @@ import TestKit.IntegrationTest;
 /**
  * Instance of RestControllerTest.java
  * 
- * @author Guillermo Facundo Colunga
+ * @author
  * @version
  */
 @SpringBootTest(classes = { Application.class })
 @RunWith(SpringJUnit4ClassRunner.class)
 @Category(IntegrationTest.class)
 @ActiveProfiles("test")
-public class RESTControllerTest {
+public class WebControllerTest {
 
 	@Autowired
 	private WebApplicationContext context;
@@ -56,13 +56,23 @@ public class RESTControllerTest {
 	}
 
 	@Test
-	public void restTest() throws Exception {
-		String payload = "{\"login\":\"45170000A\",\"password\":\"4[[j[frVCUMJ>hU\",\"kind\":1,\"message\":{\"name\":\"Fuego en coto carcedo\",\"description\":\"Hay un fuego que se ha iniciado cerca del monte. Peligro para la población cercana\",\"tags\":[\"la\",\"le\",\"li\",\"lo\"],\"multimedia\":[\"www.imagen1.com\",\"www.imagen2.com\",\"www.imagen3.com\",\"www.imagen4.com\"],\"property-val\":{\"prop1\":\"val1\",\"prop2\":\"val2\",\"prop3\":\"val3\",\"prop4\":\"val4\"},\"comments\":[\"Please help!\"]}}";
-
-		// We send a POST request to that URI (from http:localhost...)
-		MockHttpServletRequestBuilder request = post( "/sensor-feed" ).session( session )
-				.contentType( MediaType.APPLICATION_JSON )
-				.content( payload.getBytes() );
-		mockMvc.perform( request ).andExpect( status().isOk() );
+	public void webTest() throws Exception {
+		UserInfo userInfo = new UserInfo("45170000A","4[[j[frVCUMJ>hU","1");
+		
+		MockHttpServletRequestBuilder request = post("/login").session(session).param("login", userInfo.getLogin())
+				.param("password", userInfo.getPassword()).param("kind", userInfo.getKind());
+			mockMvc.perform(request).andExpect(status().isOk());
+			
+		IncidentInfo incidentInfo = new IncidentInfo("nombre","descripcion","localizacion",
+				"asignado", "expiracion", "tag1, tag2, tag3", "www.imagen1.com, www.inagen2.com",
+				"prop1 : val1, prop2 : val2, prop3 : val3", "estado");	
+			
+		request = post("/incident").session(session).param("name", incidentInfo.getName())
+				.param("description", incidentInfo.getDescription()).param("location", incidentInfo.getLocation())
+				.param("asignee", incidentInfo.getAsignee()).param("tags", incidentInfo.getTags())
+				.param("multimedia", incidentInfo.getMultimedia()).param("properties", incidentInfo.getProperties())
+				.param("state", incidentInfo.getState());
+			mockMvc.perform(request).andExpect(status().isOk());
 	}
+
 }
