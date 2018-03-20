@@ -57,22 +57,22 @@ public class WebControllerTest {
 
 	@Test
 	public void webTest() throws Exception {
-		String payload = "{\"login\":\"45170000A\",\"password\":\"4[[j[frVCUMJ>hU\",\"kind\":\"1\"}";
-
-		// We send a POST request to that URI (from http:localhost...)
-		MockHttpServletRequestBuilder request = post( "/login" ).session( session )
-				.contentType( MediaType.APPLICATION_JSON )
-				.content( payload.getBytes() );
-		mockMvc.perform( request ).andExpect( status().isOk() );
+		UserInfo userInfo = new UserInfo("45170000A","4[[j[frVCUMJ>hU","1");
 		
-		
-		payload = "{\\\"name\\\":\\\"Fuego en coto carcedo\\\",\\\"description\\\":\\\"Hay un fuego que se ha iniciado cerca del monte. Peligro para la población cercana\\\",\\\"tags\\\":\\\"la, le, li, lo ,\\\"multimedia\\\":\\\"www.imagen1.com, www.imagen2.com, www.imagen3.com, www.imagen4.com\\\",\\\"property-val\\\":\\\"prop1:val1, prop2:val2, prop3:val3, prop4:val4\\\"}";
-
-		// We send a POST request to that URI (from http:localhost...)
-		request = post( "/incident" ).session( session )
-				.contentType( MediaType.APPLICATION_JSON )
-				.content( payload.getBytes() );
-		mockMvc.perform( request ).andExpect( status().isOk() );
+		MockHttpServletRequestBuilder request = post("/login").session(session).param("login", userInfo.getLogin())
+				.param("password", userInfo.getPassword()).param("kind", userInfo.getKind());
+			mockMvc.perform(request).andExpect(status().isOk());
+			
+		IncidentInfo incidentInfo = new IncidentInfo("nombre","descripcion","localizacion",
+				"asignado", "expiracion", "tag1, tag2, tag3", "www.imagen1.com, www.inagen2.com",
+				"prop1 : val1, prop2 : val2, prop3 : val3", "estado");	
+			
+		request = post("/incident").session(session).param("name", incidentInfo.getName())
+				.param("description", incidentInfo.getDescription()).param("location", incidentInfo.getLocation())
+				.param("asignee", incidentInfo.getAsignee()).param("tags", incidentInfo.getTags())
+				.param("multimedia", incidentInfo.getMultimedia()).param("properties", incidentInfo.getProperties())
+				.param("state", incidentInfo.getState());
+			mockMvc.perform(request).andExpect(status().isOk());
 	}
 
 }
