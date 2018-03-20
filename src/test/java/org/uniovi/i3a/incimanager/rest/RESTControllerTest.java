@@ -65,4 +65,5 @@ public class RESTControllerTest {
 				.content( payload.getBytes() );
 		mockMvc.perform( request ).andExpect( status().isOk() );
 	}
+
 }
