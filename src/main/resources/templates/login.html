@@ -1,10 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8" />
+  <!-- to use the latest rendering engine in case it doesn't-->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <!-- Adjusts the viewport and the scale of the browser -->
+  <meta name="viewport" content="width = device-width, initial-scale = 1" />
+
+  <!-- Bootstrap CDN in order to have support for Bootstrap's CSS and js -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <!-- in order to include tether for BS 4 -->
+  <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+
+  <link rel="stylesheet" href="signin.css" />
+  <title>Login</title>
+
+</head>
+
 <body>
 
-<h1>My First Heading</h1>
+  <!-- container class in order to tell BS to treat it as a container and it is usually container -->
+  <div class="container">
+    <form action="#" id="Datos" class="form-signin" method="post">
+      <h2 class="login-title">Incident Management System</h2>
+      <input id="login" name="login" type="text" class="form-control" placeholder="Identifier" />
+      <input id="password" name="password" type="password" class="form-control" placeholder="Password" />
+      <!--<input id="kind" name="kind" type="text" class="form-control" placeholder="KindOfAgend" /> -->
+      <select id="kind" name="kind" class="form-control">
+        <option value="1">Person</option>
+        <option value="2">Entity</option>
+      </select>
+      <button id="Enter" name="Enter" type="submit" value="enter" class="btn btn-block btn-primary btn-lg">Enter </button>
+    </form>
 
-<p>My first paragraph.</p>
+  </div>
 
 </body>
+
 </html>
