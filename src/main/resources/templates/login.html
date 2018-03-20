@@ -31,7 +31,7 @@
 	<!-- container class in order to tell BS to treat it as a container and it is usually container -->
 	<div class="container">
 		<form action="#" th:action="@{/login}" id="Datos" class="form-signin"
-			method="post">
+			method="post" enctype="application/json">
 			<h2>Login</h2>
 			<input id="login" name="login" type="text" class="form-control"
 				placeholder="Identifier" /> <input id="password" name="password"
@@ -40,7 +40,6 @@
 			<select id="kind" name="kind" class="form-control">
 				<option value="1">Person</option>
 				<option value="2">Entity</option>
-				<option value="3">Sensor</option>
 			</select>
 			<button id="Enter" name="Enter" type="submit" value="enter"
 				class="btn btn-block btn-primary btn-lg">Enter</button>

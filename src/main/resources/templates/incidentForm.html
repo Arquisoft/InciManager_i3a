@@ -27,14 +27,15 @@
   <div class="container">
     <form action="#" th:action="@{/incident}" id="Datos" class="form-incident" method="post">
       <h2>Incident</h2>
-      <input id="IncidenceName" name="IncidenceName" type="text" class="form-control" placeholder="Incident Name" />
+      <input id="name" name="name" type="text" class="form-control" placeholder="Incident Name" />
       <input id="description" name="description" type="text" class="form-control" placeholder="Description" />
+      <input id="location" name="location" type="text" class="form-control" placeholder="Location-> 10N10W" />
       <input id="assignee" name="assignee" type="text" class="form-control" placeholder="Assignee" />
       <input id="expiration" name="expiration" type="text" class="form-control" placeholder="Expiration" />
       <input id="state" name="state" type="text" class="form-control" placeholder="State" />
-      <input id="tags" name="tags" type="text" class="form-control" placeholder="Tags-> fuego,peligro,poblacion" />
-      <input id="additional_information" name="additional_information" type="text" class="form-control" placeholder="Additional Informatiobn-> www.imagen1.com,www.imagen2.com" />
-      <input id="properties" name="properties" type="text" class="form-control" placeholder="Properties-> prop1:value1,prop2:value2,prop3:value3" />
+      <input id="tags" name="tags" type="text" class="form-control" placeholder="Tags-> fuego, peligro, poblacion" />
+      <input id="multimedia" name="multimedia" type="text" class="form-control" placeholder="Additional Information-> www.imagen1.com, www.imagen2.com" />
+      <input id="properties" name="properties" type="text" class="form-control" placeholder="Properties-> prop1:value1, prop2:value2, prop3:value3" />
       <button id="Enter" name="Enter" type="submit" value="enter" class="btn btn-block btn-primary btn-lg">Enter </button>
     </form>
 

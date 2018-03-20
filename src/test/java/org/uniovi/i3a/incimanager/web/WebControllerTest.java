@@ -1,0 +1,78 @@
+/*
+ * This source file is part of the rest-service open source project.
+ *
+ * Copyright (c) 2018 willy and the rest-service project authors.
+ * Licensed under GNU General Public License v3.0.
+ *
+ * See /LICENSE for license information.
+ * 
+ */
+package org.uniovi.i3a.incimanager.web;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockHttpSession;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
+import org.uniovi.i3a.incimanager.Application;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import TestKit.IntegrationTest;
+
+/**
+ * Instance of RestControllerTest.java
+ * 
+ * @author
+ * @version
+ */
+@SpringBootTest(classes = { Application.class })
+@RunWith(SpringJUnit4ClassRunner.class)
+@Category(IntegrationTest.class)
+@ActiveProfiles("test")
+public class WebControllerTest {
+
+	@Autowired
+	private WebApplicationContext context;
+	private MockHttpSession session;
+	private MockMvc mockMvc;
+
+	@Before
+	public void setUp() throws Exception {
+
+		this.mockMvc = MockMvcBuilders.webAppContextSetup( this.context ).build();
+
+		session = new MockHttpSession();
+	}
+
+	@Test
+	public void webTest() throws Exception {
+		String payload = "{\"login\":\"45170000A\",\"password\":\"4[[j[frVCUMJ>hU\",\"kind\":\"1\"}";
+
+		// We send a POST request to that URI (from http:localhost...)
+		MockHttpServletRequestBuilder request = post( "/login" ).session( session )
+				.contentType( MediaType.APPLICATION_JSON )
+				.content( payload.getBytes() );
+		mockMvc.perform( request ).andExpect( status().isOk() );
+		
+		
+		payload = "{\\\"name\\\":\\\"Fuego en coto carcedo\\\",\\\"description\\\":\\\"Hay un fuego que se ha iniciado cerca del monte. Peligro para la población cercana\\\",\\\"tags\\\":\\\"la, le, li, lo ,\\\"multimedia\\\":\\\"www.imagen1.com, www.imagen2.com, www.imagen3.com, www.imagen4.com\\\",\\\"property-val\\\":\\\"prop1:val1, prop2:val2, prop3:val3, prop4:val4\\\"}";
+
+		// We send a POST request to that URI (from http:localhost...)
+		request = post( "/incident" ).session( session )
+				.contentType( MediaType.APPLICATION_JSON )
+				.content( payload.getBytes() );
+		mockMvc.perform( request ).andExpect( status().isOk() );
+	}
+
+}
