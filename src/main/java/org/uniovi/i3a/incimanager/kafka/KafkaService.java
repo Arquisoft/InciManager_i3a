@@ -33,7 +33,6 @@ public class KafkaService {
 	private MongoTemplate mongoTemplate;
 
 	@SuppressWarnings({ "unchecked" })
-	@Async
 	public boolean sendIncidence(Map<String, Object> payload) {
 
 		// Incidence info
