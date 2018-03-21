@@ -1,4 +1,4 @@
-package org.uniovi.i3a.incimanager.kafka;
+package org.uniovi.i3a.incimanager.kafka.wrongkafkadummy;
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,14 +20,13 @@ import org.springframework.util.concurrent.ListenableFutureCallback;
 
 @ManagedBean
 @EnableAsync
-public class KafkaService {
+public class WrongKafkaService {
 
 	private final String TOPIC = "INCIDENCES";
 
 	private static final Logger logger = Logger.getLogger(KafkaProducer.class);
 
-	@Autowired
-	private KafkaTemplate<String, String> kafkaTemplate;
+	private KafkaTemplate<String, String> kafkaTemplate = new WrongKafkaProduceFactory().wrongkafkaTemplate();
 
 	@Autowired
 	private MongoTemplate mongoTemplate;

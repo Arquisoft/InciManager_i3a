@@ -15,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.uniovi.i3a.incimanager.Application;
+import org.uniovi.i3a.incimanager.kafka.wrongkafkadummy.WrongKafkaService;
 
 import TestKit.IntegrationTest;
 
@@ -27,6 +28,9 @@ public class KafkaServiceTest {
 	@Autowired
 	KafkaService kafka;
 
+	@Autowired
+	WrongKafkaService wrongKafka;
+	
 	HashMap<String, Object> payload;
 
 	List<String> tags, additionalInfo;
@@ -76,6 +80,12 @@ public class KafkaServiceTest {
 	public void testKafkaEnqueue()
 	{   
 		Assert.assertTrue( kafka.sendIncidence(payload) );
+	}
+	
+	@Test
+	public void testKafkaNotEnqueue()
+	{   
+		Assert.assertFalse( wrongKafka.sendIncidence(payload) );
 	}
 	
 	

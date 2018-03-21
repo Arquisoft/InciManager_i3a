@@ -1,4 +1,4 @@
-package org.uniovi.i3a.incimanager.kafka;
+package org.uniovi.i3a.incimanager.kafka.wrongkafkadummy;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,28 +12,22 @@ import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 
-@Configuration
-@EnableKafka
-public class KafkaProduceFactory {
+public class WrongKafkaProduceFactory {
 
-	@Bean
-	public ProducerFactory<String, String> producerFactory() {
+	public ProducerFactory<String, String> WrongProducerFactory() {
 		return new DefaultKafkaProducerFactory<>(producerConfigs());
 	}
 
-	@Bean
 	public Map<String, Object> producerConfigs() {
 		Map<String, Object> props = new HashMap<>();
-		props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+		props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9090");
 		props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,StringSerializer.class.getName());
 		props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,StringSerializer.class.getName());
-		props.put(ProducerConfig.REQUEST_TIMEOUT_MS_CONFIG, "10000");
 		return props;
 	}
 
-	@Bean
-	public KafkaTemplate<String, String> kafkaTemplate() {
-		return new KafkaTemplate<String, String>(producerFactory());
+	public KafkaTemplate<String, String> wrongkafkaTemplate() {
+		return new KafkaTemplate<String, String>(WrongProducerFactory());
 	}
 
 }
