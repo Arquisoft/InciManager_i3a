@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -58,7 +59,7 @@ public class KafkaServiceTest {
 		properties.put("prioridad", "alta");
 		
 		payload = new HashMap<String, Object>();
-		payload.put("username", username);
+		payload.put("login", username);
 		payload.put("password", password);
 		payload.put("incidenceName", incidenceName);
 		payload.put("description", description);
@@ -73,8 +74,10 @@ public class KafkaServiceTest {
 	
 	@Test
 	public void testKafkaEnqueue()
-	{
-		kafka.sendIncidence(payload);
+	{   
+		Assert.assertTrue( kafka.sendIncidence(payload) );
 	}
+	
+	
 
 }
