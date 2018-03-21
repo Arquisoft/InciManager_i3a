@@ -31,7 +31,18 @@ public class KafkaService {
 
 	@Autowired
 	private MongoTemplate mongoTemplate;
-
+	
+	
+/**
+    * Sends a payload map to the Kafka stream pipe and stores in mongoDB for
+    * redundancy.
+    *
+    * @return true if the Kafka and mongoDB insertions where right. False otherwise.
+    *
+    * @param payload is the map of key type string and value type object that
+    * will represent the JSON of the request. The Object value type helps not to bound
+    * the value to only one type.
+    */
 	@SuppressWarnings({ "unchecked" })
 	public boolean sendIncidence(Map<String, Object> payload) {
 
