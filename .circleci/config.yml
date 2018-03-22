@@ -40,7 +40,7 @@ jobs:
       - run: wget https://github.com/Arquisoft/Agents_i3a/archive/v0.1.zip
       - run: unzip v0.1.zip
       - run: wget https://github.com/thewilly/UDocs/raw/master/kafka_2.11-0.11.0.1.zip -O kafka.zip
-      - run: mkdir -p kafka && unzip kafka.zip kafka
+      - run: mkdir -p kafka && unzip kafka.zip
       - run:
           command: sh kafka_2.11-0.11.0.1/bin/zookeeper-server-start.sh kafka_2.11-0.11.0.1/config/zookeeper.properties;
           background: true
