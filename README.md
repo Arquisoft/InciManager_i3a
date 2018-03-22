@@ -32,16 +32,16 @@ curl -H "Content-Type: application/json" -X POST -d '{"login":"45170000A","passw
 ```
 After this point and incident will be submitted to Apache kafka and to the database of incidents.
 
-+
- +#### KafkaService
- +First we need to start Apache Zookeper and Apache Kafka, [here](https://www.apache.org/dyn/closer.cgi?path=/kafka/1.0.1/kafka_2.11-1.0.1.tgz) you can download both at once. For further about its execution please go to [Kafka quickstart](https://kafka.apache.org/quickstart).
- +
- +Zookeper:
- +```bash
- +bin/zookeeper-server-start.sh config/zookeeper.properties
- +```
- +Kafka:
- +```bash
- +bin/kafka-server-start.sh config/server.properties
- +```
- +At last you would need to execute the REST or WEB module to use this module.
+
+#### KafkaService
+First we need to start Apache Zookeper and Apache Kafka, [here](https://www.apache.org/dyn/closer.cgi?path=/kafka/1.0.1/kafka_2.11-1.0.1.tgz) you can download both at once. For further about its execution please go to [Kafka quickstart](https://kafka.apache.org/quickstart).
+
+Zookeper:
+```bash
+bin/zookeeper-server-start.sh config/zookeeper.properties
+```
+Kafka:
+```bash
+bin/kafka-server-start.sh config/server.properties
+```
+At last you would need to execute the REST or WEB module to use this module.
