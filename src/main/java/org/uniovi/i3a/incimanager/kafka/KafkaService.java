@@ -1,7 +1,6 @@
 package org.uniovi.i3a.incimanager.kafka;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
@@ -25,6 +24,8 @@ public class KafkaService implements IKafkaService{
 
 	@Value("${kafka.topic}")
 	private String TOPIC;
+	@Value("${incidence.defaults.state}")
+	private String state;
 
 	private static final Logger logger = Logger.getLogger(KafkaProducer.class);
 
@@ -36,35 +37,42 @@ public class KafkaService implements IKafkaService{
 
 	@SuppressWarnings({ "unchecked" })
 	public boolean sendIncidence(Map<String, Object> payload) {
-
-		// Incidence info
-		String username = payload.get("login").toString();
-		String password = payload.get("password").toString();
-		String incidenceName = payload.get("incidenceName").toString();
-		String description = payload.get("description").toString();
-		String asignee = payload.get("asignee").toString();
-		Long expiration = (Long) payload.get("expiration");
-		String state = payload.get("state").toString();
-		String location = payload.get("location").toString();
-		List<String> tags = (List<String>) payload.get("tags");
-		List<String> additionalInfo = (List<String>) payload.get("additional_information");
-		Map<String, String> properties = (Map<String, String>) payload.get("properties");
-
 		Map<String, Object> map;
 		map = new HashMap<String, Object>();
-		map.put("username", username);
-		map.put("password", password);
-		map.put("incidenceName", incidenceName);
-		map.put("description", description);
-		map.put("asignee", asignee);
-		map.put("state", state);
-		map.put("expiration", expiration);
-		map.put("tags", tags);
-		map.put("additional_information", additionalInfo);
-		map.put("properties", properties);
-		map.put("location", location);
-
+		
+		//Chec
+		if( payload.get("login") == null )
+			return false;
+		if( payload.get("password") == null )
+			return false;
+		if( payload.get("incidenceName") == null )
+			return false;
+		if( payload.get("description") == null )
+			return false;
+		if( payload.get("location") == null )
+			return false;
+		
+		//Set default state if none.
+		
+		if( payload.get("state") != null )
+			state = payload.get("state").toString();
+		
+		//Store relevant information only
+		map.put("username", payload.get("login") );
+		map.put("password", payload.get("password") );
+		map.put("name", payload.get("incidenceName") );
+		map.put("description", payload.get("description"));
+		map.put("asignee", payload.get("asignee") );
+		map.put("state", state );
+		map.put("expiration", payload.get("expiration"));
+		map.put("tags", payload.get("location"));
+		map.put("multimedia", payload.get("additional_information"));
+		map.put("property_value", payload.get("properties"));
+		map.put("location", payload.get("location"));
+		
+		
 		return send(TOPIC, new JSONObject(map).toString());
+		
 	}
 	private boolean send(String topic, String data) {
 		ListenableFuture<SendResult<String, String>> future = kafkaTemplate.send(topic, data);

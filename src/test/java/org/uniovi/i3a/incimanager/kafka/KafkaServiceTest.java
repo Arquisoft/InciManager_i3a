@@ -83,7 +83,53 @@ public class KafkaServiceTest {
 	}
 	
 	@Test
-	public void testKafkaNotEnqueue()
+	public void testKafkaNoUsername()
+	{   
+		payload.remove("login");
+		Assert.assertFalse( kafka.sendIncidence(payload) );
+	}
+	@Test
+	public void testKafkaNoPassword()
+	{   
+		payload.remove("password");
+		Assert.assertFalse( kafka.sendIncidence(payload) );
+	}
+	@Test
+	public void testKafkaNoDescription()
+	{   
+		payload.remove("description");
+		Assert.assertFalse( kafka.sendIncidence(payload) );
+	}
+	@Test
+	public void testKafkaNoName()
+	{   
+		payload.remove("incidenceName");
+		Assert.assertFalse( kafka.sendIncidence(payload) );
+	}
+	@Test
+	public void testKafkaNoLocation()
+	{   
+		payload.remove("location");
+		Assert.assertFalse( kafka.sendIncidence(payload) );
+	}
+		
+	@Test
+	public void testKafkaNoState()
+	{   
+		payload.remove("state");
+		Assert.assertTrue( kafka.sendIncidence(payload) );
+	}
+	
+	@Test
+	public void testKafkaNoOptianl()
+	{   
+		payload.remove("tags");
+		payload.remove("expiration");
+		Assert.assertTrue( kafka.sendIncidence(payload) );
+	}
+	
+	@Test
+	public void testKafkaNoConnection()
 	{   
 		Assert.assertFalse( wrongKafka.sendIncidence(payload) );
 	}
