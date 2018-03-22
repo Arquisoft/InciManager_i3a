@@ -18,11 +18,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.uniovi.i3a.incimanager.rest.AgentsQueryFormatter;
+import org.uniovi.i3a.incimanager.kafka.KafkaService;
 import org.uniovi.i3a.incimanager.rest.AgentsConnection;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
@@ -39,6 +41,9 @@ public class WebController {
 
 	@Autowired
 	AgentsConnection agentsConnection;
+	
+	@Autowired
+	KafkaService kafkaService;
 
 	@RequestMapping(value = "/")
 	public String index() {
@@ -46,20 +51,22 @@ public class WebController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String setLogin(@ModelAttribute("UserInfo") UserInfo values, BindingResult result) {
+	public String setLogin(Model model, @ModelAttribute("UserInfo") UserInfo values, BindingResult result) {
 		HttpResponse<JsonNode> authenticationResponse = agentsConnection
 				.executeQuery(new AgentsQueryFormatter(
 						values.getLogin(), values.getPassword(), values.getKind()).query());
 		if (authenticationResponse.getStatus() == HttpStatus.OK.value()) {
+			model.addAttribute("login", values.getLogin());
+			model.addAttribute("password", values.getPassword());
 			return "incidentForm";
 		}
 		return "login";
 	}
 
 	@RequestMapping(value = "/incident", method = RequestMethod.POST)
-	public String setIncident(@ModelAttribute("IncidentInfo") IncidentInfo values, BindingResult result) {
+	public String setIncident(Model model, @ModelAttribute("IncidentInfo") IncidentInfo values, BindingResult result) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("name", values.getName());
+		map.put("incidenceName", values.getName());
 		map.put("description", values.getDescription());
 		map.put("location", values.getLocation());
 		map.put("asignee", values.getAsignee());
@@ -80,13 +87,23 @@ public class WebController {
 		
 		Map<String, String> propsList = new HashMap<String, String>();
 		for (String prop : ((String) values.getProperties()).split(",")) {
+			if (prop.split(":").length == 2)
 				propsList.put(prop.split(":")[0].trim(), prop.split(":")[1].trim());
 		}
 		map.put("properties", propsList);
 		
-		//Llamada a la interfaz de conexion a kafka
-		System.out.println(values.toString());
+		/*if (kafkaService.sendIncidence(map)) {
+			model.addAttribute("valuesMap", map);
+			return "result";
+		}
 		
-		return "login";
+		return "incident"*/
+		model.addAttribute("valuesMap", map);
+		return "result";
+	}
+	
+	@RequestMapping(value = "/incident")
+	public String getIncident() {
+		return "incidentForm";
 	}
 }
