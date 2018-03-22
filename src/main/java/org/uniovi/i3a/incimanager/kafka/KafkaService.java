@@ -21,7 +21,7 @@ import org.springframework.util.concurrent.ListenableFutureCallback;
 
 @ManagedBean
 @EnableAsync
-public class KafkaService {
+public class KafkaService implements IKafkaService{
 
 	@Value("${kafka.topic}")
 	private String TOPIC;
