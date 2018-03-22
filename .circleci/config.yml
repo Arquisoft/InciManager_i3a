@@ -21,7 +21,7 @@ jobs:
       - run:
           command: sh kafka_2.11-0.11.0.1/bin/kafka-server-start.sh kafka_2.11-0.11.0.1/config/server.properties;
           background: true
-      -run:
+      - run:
           command: sh bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic INCIDENCES;
           background: true
       - run:
