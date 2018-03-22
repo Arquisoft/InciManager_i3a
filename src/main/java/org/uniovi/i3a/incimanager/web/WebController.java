@@ -22,8 +22,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.uniovi.i3a.incimanager.rest.AgentsQueryFormatter;
+import org.uniovi.i3a.incimanager.kafka.KafkaService;
 import org.uniovi.i3a.incimanager.rest.AgentsConnection;
+import org.uniovi.i3a.incimanager.rest.AgentsQueryFormatter;
+
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 
@@ -39,6 +41,9 @@ public class WebController {
 
 	@Autowired
 	AgentsConnection agentsConnection;
+	
+	@Autowired
+	KafkaService kafkaService;
 
 	@RequestMapping(value = "/")
 	public String index() {
@@ -84,6 +89,7 @@ public class WebController {
 		}
 		map.put("properties", propsList);
 		
+		kafkaService.sendIncidence(map);
 		//Llamada a la interfaz de conexion a kafka
 		System.out.println(values.toString());
 		
