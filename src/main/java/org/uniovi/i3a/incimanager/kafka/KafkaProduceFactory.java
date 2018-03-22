@@ -18,9 +18,6 @@ import org.springframework.kafka.core.ProducerFactory;
 public class KafkaProduceFactory {
 
 	@Value("${spring.kafka.producer.bootstrap-servers}")
-	String broker;
-
-	@Value("${spring.kafka.producer.bootstrap-servers}")
 	String server;
 	@Value("${karafka.username}")
 	String username;
