@@ -41,9 +41,6 @@ public class WebController {
 
 	@Autowired
 	AgentsConnection agentsConnection;
-	
-	@Autowired
-	KafkaService kafkaService;
 
 	@RequestMapping(value = "/")
 	public String index() {
@@ -89,7 +86,6 @@ public class WebController {
 		}
 		map.put("properties", propsList);
 		
-		kafkaService.sendIncidence(map);
 		//Llamada a la interfaz de conexion a kafka
 		System.out.println(values.toString());
 		
