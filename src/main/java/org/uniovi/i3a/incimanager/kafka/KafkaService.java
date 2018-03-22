@@ -11,6 +11,7 @@ import org.apache.kafka.clients.producer.KafkaProducer;
 import org.jboss.logging.Logger;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
@@ -22,7 +23,8 @@ import org.springframework.util.concurrent.ListenableFutureCallback;
 @EnableAsync
 public class KafkaService {
 
-	private final String TOPIC = "INCIDENCES";
+	@Value("${kafka.topic}")
+	private String TOPIC;
 
 	private static final Logger logger = Logger.getLogger(KafkaProducer.class);
 
@@ -62,8 +64,7 @@ public class KafkaService {
 		map.put("properties", properties);
 		map.put("location", location);
 
-		boolean success = send(TOPIC, new JSONObject(map).toString());
-		return success;
+		return send(TOPIC, new JSONObject(map).toString());
 	}
 	private boolean send(String topic, String data) {
 		ListenableFuture<SendResult<String, String>> future = kafkaTemplate.send(topic, data);
