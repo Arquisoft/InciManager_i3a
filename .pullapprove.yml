@@ -48,6 +48,8 @@ groups:
   master-reviewrs:
     users:
       - thewilly
+      - ByBordex
+      - CarlosGarciaHdz
     required: 1
     # In this group, your self-approval does count
     author_approval:
@@ -63,6 +65,8 @@ groups:
   testers:
     users:
       - thewilly
+      - ByBordex
+      - CarlosGarciaHdz
     required: 1
     # In this group, your self-approval does count
     author_approval:
@@ -71,7 +75,49 @@ groups:
     conditions:
       files:
         include:
-          - "/src/test/*"
+          - "src/test/*"
+
+  web:
+    users:
+      - CarlosGarciaHdz
+    required: 1
+    # In this group, your self-approval does count
+    author_approval:
+      auto: true
+      ignored: false
+    conditions:
+      files:
+        include:
+          - "src/main/java/org/uniovi/i3a/incimanager/web/*"
+          - "src/test/java/org/uniovi/i3a/incimanager/web/*"
+
+  rest:
+    users:
+      - thewilly
+    required: 1
+    # In this group, your self-approval does count
+    author_approval:
+      auto: true
+      ignored: false
+    conditions:
+      files:
+        include:
+          - "src/main/java/org/uniovi/i3a/incimanager/rest/*"
+          - "src/test/java/org/uniovi/i3a/incimanager/rest/*"
+
+  kafka:
+    users:
+      - ByBordex
+    required: 1
+    # In this group, your self-approval does count
+    author_approval:
+      auto: true
+      ignored: false
+    conditions:
+      files:
+        include:
+          - "src/main/java/org/uniovi/i3a/incimanager/kafka/*"
+          - "src/test/java/org/uniovi/i3a/incimanager/kafka/*"
 
   continuos-integration:
     users:
@@ -100,8 +146,10 @@ groups:
         include:
           - ".github/*"
           - ".gitignore"
+          - ".gitattributes"
           - "*.md"
           - "LICENSE"
+          - "pullapprove.yml"
 
   dependency-managers:
     users:
