@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
@@ -31,17 +30,26 @@
 
 	<!-- container class in order to tell BS to treat it as a container and it is usually container -->
 	<div class="container">
-		<form action="/login" id="Datos" th:object="${UserInfo}" class="form-signin"
-			method="post">
+		<form action="/login" id="Datos" th:object="${UserInfo}"
+			class="form-signin" method="post">
 			<h2>Login</h2>
-			<input id="login" name="login" type="text" class="form-control"
-				placeholder="Identifier" /> <input id="password" name="password"
-				type="password" class="form-control" placeholder="Password" />
-			<!--<input id="kind" name="kind" type="text" th:field="*{kind}" class="form-control" placeholder="KindOfAgend" /> -->
-			<select id="kind" name="kind" class="form-control">
-				<option value="1">Person</option>
-				<option value="2">Entity</option>
-			</select>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="login">Username:</label>
+				<input id="login" name="login" type="text" class="form-control"
+					placeholder="Identifier" />
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="password">Password:</label>
+				<input id="password" name="password" type="password"
+					class="form-control" placeholder="Password" />
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="kind">Kind:</label>
+				<select id="kind" name="kind" class="form-control">
+					<option value="1">Person</option>
+					<option value="2">Entity</option>
+				</select>
+			</div>
 			<button id="Enter" name="Enter" type="submit" value="enter"
 				class="btn btn-block btn-primary btn-lg">Enter</button>
 		</form>
