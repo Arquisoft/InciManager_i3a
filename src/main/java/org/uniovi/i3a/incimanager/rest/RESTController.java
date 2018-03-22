@@ -22,8 +22,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import lombok.val;
-import lombok.extern.slf4j.Slf4j;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
 
 /**
  * Instance of RESTController.java
@@ -31,7 +31,6 @@ import lombok.extern.slf4j.Slf4j;
  * @author Guillermo Facundo Colunga
  * @version 201803152243
  */
-@Slf4j
 @EntityScan
 @RestController
 public class RESTController {
@@ -41,23 +40,20 @@ public class RESTController {
 
 	@RequestMapping(value = "/sensor-feed", method = RequestMethod.POST, consumes = {
 			MediaType.APPLICATION_JSON_VALUE }, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> processSensorRequest( @RequestBody Map<String, Object> payload ) {
+	public ResponseEntity<Object> processSensorRequest( @RequestBody Map<String, Object> payload ) {
 		
 		// Authentication of the agent that made the request.
-		val authenticationResponse = agentsConnection.executeQuery( new AgentsQueryFormatter( payload ).query() );
+		HttpResponse<JsonNode> authenticationResponse = 
+				agentsConnection
+				.executeQuery( new AgentsQueryFormatter( payload ).query() );
 		
 		if(authenticationResponse.getStatus() != HttpStatus.OK.value()) {
-			log.warn( "[ERROR] UNAUTHORIZED ACCESS: trying to access as: "
-						+ payload.get( "login" ) + " "
-						+ payload.get( "password" ) + " "
-						+ payload.get( "kind" ));
-			
-			return new ResponseEntity<String>("{\"response\":\"UNAUTHORIZED ACCESS WILL BE REPORTED\"}", HttpStatus.UNAUTHORIZED );
+			return new ResponseEntity<>( HttpStatus.UNAUTHORIZED );
 		}
 		
 		// Process the message in the request.
 		@SuppressWarnings({ "unchecked" })
-		val message = (LinkedHashMap<String, Object>) payload.get( "message" );
+		LinkedHashMap<String, Object> message = (LinkedHashMap<String, Object>) payload.get( "message" );
 		message.put( "name", authenticationResponse.getBody().getObject().get( "name" ) );
 		message.put( "location", authenticationResponse.getBody().getObject().get( "location" ) );
 		message.put( "email", authenticationResponse.getBody().getObject().get( "email" ) );
@@ -67,9 +63,10 @@ public class RESTController {
 		
 		System.out.println( message );
 		
+		
 		// Send the message to Apache Kafka | Database
 		
 		// If all went OK return OK status.
-		return new ResponseEntity<String>("{\"response\":\"request processed\"}", HttpStatus.OK );
+		return new ResponseEntity<>( HttpStatus.OK );
 	}
 }

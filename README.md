@@ -28,6 +28,6 @@ mvn spring-boot:run
 ```
 Then, go to the directory where InciManager_i3a i and run it with the same command. Finally execute this query in your terminal application:
 ```bash
-curl -H "Content-Type: application/json" -X POST -d '{"login":"45170000A","password":"4[[j[frVCUMJ>hU","kind":1,"message":{"IncidenceName":"Fuego en coto carcedo","description":"Hay un fuego que se ha iniciado cerca del monte. Peligro para la población cercana","asignee":"","expiration":"1521475598","state":"open","tags":["fuego","peligro","población","castrillón"],"additional_information":["www.imagen1.com","www.imagen2.com","www.imagen3.com","www.imagen4.com"],"properties":{"prop1":"val1","prop2":"val2","prop3":"val3","prop4":"val4"}}}' http://localhost:8080/sensor-feed
+curl -H "Content-Type: application/json" -X POST -d '{"login":"45170000A","password":"4[[j[frVCUMJ>hU","kind":1,"message":{"name":"Fuego en coto carcedo","description":"Hay un fuego que se ha iniciado cerca del monte. Peligro para la población cercana","tags":["la","le","li","lo"],"multimedia":["www.imagen1.com","www.imagen2.com","www.imagen3.com","www.imagen4.com"],"property-val":{"prop1":"val1","prop2":"val2","prop3":"val3","prop4":"val4"},"comments":["Please help!"]}}' http://localhost:8090/sensor-feed
 ```
 After this point and incident will be submitted to Apache kafka and to the database of incidents.
