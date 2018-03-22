@@ -49,7 +49,7 @@ groups:
     users:
       - thewilly
       - ByBordex
-      - CarlosGarciaHdz
+      - CarlosGarciaHdez
     required: 1
     # In this group, your self-approval does count
     author_approval:
@@ -66,7 +66,7 @@ groups:
     users:
       - thewilly
       - ByBordex
-      - CarlosGarciaHdz
+      - CarlosGarciaHdez
     required: 1
     # In this group, your self-approval does count
     author_approval:
@@ -79,7 +79,7 @@ groups:
 
   web:
     users:
-      - CarlosGarciaHdz
+      - CarlosGarciaHdez
     required: 1
     # In this group, your self-approval does count
     author_approval:
