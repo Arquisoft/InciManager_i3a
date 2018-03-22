@@ -31,3 +31,17 @@ Then, go to the directory where InciManager_i3a i and run it with the same comma
 curl -H "Content-Type: application/json" -X POST -d '{"login":"45170000A","password":"4[[j[frVCUMJ>hU","kind":1,"message":{"name":"Fuego en coto carcedo","description":"Hay un fuego que se ha iniciado cerca del monte. Peligro para la población cercana","tags":["la","le","li","lo"],"multimedia":["www.imagen1.com","www.imagen2.com","www.imagen3.com","www.imagen4.com"],"property-val":{"prop1":"val1","prop2":"val2","prop3":"val3","prop4":"val4"},"comments":["Please help!"]}}' http://localhost:8090/sensor-feed
 ```
 After this point and incident will be submitted to Apache kafka and to the database of incidents.
+
++
+ +#### KafkaService
+ +First we need to start Apache Zookeper and Apache Kafka, [here](https://www.apache.org/dyn/closer.cgi?path=/kafka/1.0.1/kafka_2.11-1.0.1.tgz) you can download both at once. For further about its execution please go to [Kafka quickstart](https://kafka.apache.org/quickstart).
+ +
+ +Zookeper:
+ +```bash
+ +bin/zookeeper-server-start.sh config/zookeeper.properties
+ +```
+ +Kafka:
+ +```bash
+ +bin/kafka-server-start.sh config/server.properties
+ +```
+ +At last you would need to execute the REST or WEB module to use this module.
