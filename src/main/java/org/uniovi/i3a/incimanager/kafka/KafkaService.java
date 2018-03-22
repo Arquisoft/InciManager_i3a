@@ -1,7 +1,6 @@
 package org.uniovi.i3a.incimanager.kafka;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
@@ -56,7 +55,7 @@ public class KafkaService implements IKafkaService{
 		//Set default state if none.
 		
 		if( payload.get("state") != null )
-			state = "OPEN";
+			state = payload.get("state").toString();
 		
 		//Store relevant information only
 		map.put("username", payload.get("login") );
