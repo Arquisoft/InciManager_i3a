@@ -13,6 +13,17 @@ jobs:
       - checkout
       - run: wget https://github.com/Arquisoft/Agents_i3a/archive/v0.1.zip
       - run: unzip v0.1.zip
+      - run: wget https://github.com/thewilly/UDocs/raw/master/kafka_2.11-0.11.0.1.zip -O kafka.zip
+      - run: mkdir -p kafka && unzip kafka.zip
+      - run:
+          command: sh kafka_2.11-0.11.0.1/bin/zookeeper-server-start.sh kafka_2.11-0.11.0.1/config/zookeeper.properties;
+          background: true
+      - run:
+          command: sh kafka_2.11-0.11.0.1/bin/kafka-server-start.sh kafka_2.11-0.11.0.1/config/server.properties;
+          background: true
+      - run:
+          command: sh bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic INCIDENCES;
+          background: true
       - run:
           command: cd Agents_i3a-0.1/; mvn spring-boot:run;
           background: true
@@ -31,6 +42,14 @@ jobs:
       - checkout
       - run: wget https://github.com/Arquisoft/Agents_i3a/archive/v0.1.zip
       - run: unzip v0.1.zip
+      - run: wget https://github.com/thewilly/UDocs/raw/master/kafka_2.11-0.11.0.1.zip -O kafka.zip
+      - run: mkdir -p kafka && unzip kafka.zip
+      - run:
+          command: sh kafka_2.11-0.11.0.1/bin/zookeeper-server-start.sh kafka_2.11-0.11.0.1/config/zookeeper.properties;
+          background: true
+      - run:
+          command: sh kafka_2.11-0.11.0.1/bin/kafka-server-start.sh kafka_2.11-0.11.0.1/config/server.properties
+          background: true
       - run:
           command: cd Agents_i3a-0.1/; mvn spring-boot:run;
           background: true
