@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.uniovi.i3a.incimanager.kafka.IKafkaService;
 
 import lombok.val;
 import lombok.extern.slf4j.Slf4j;
@@ -38,6 +39,9 @@ public class RESTController {
 	
 	@Autowired
 	AgentsConnection agentsConnection;
+	
+	@Autowired
+	IKafkaService kafkaService;
 
 	@RequestMapping(value = "/sensor-feed", method = RequestMethod.POST, consumes = {
 			MediaType.APPLICATION_JSON_VALUE }, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -65,12 +69,19 @@ public class RESTController {
 		message.put( "kind", authenticationResponse.getBody().getObject().get( "kind" ) );
 		message.put( "kindCode", authenticationResponse.getBody().getObject().get( "kindCode" ) );
 		
+		message.put( "login", payload.get( "login" ) );
+		message.put( "password", payload.get( "password" ) );
+		
 		System.out.println( message );
 		
 		// Send the message to Apache Kafka | Database
 		// kafkaService.sendIncidence(message);
 		
+		if(kafkaService.sendIncidence( message )) {
+			return new ResponseEntity<String>("{\"response\":\"request processed\"}", HttpStatus.OK );
+		}
+		
 		// If all went OK return OK status.
-		return new ResponseEntity<String>("{\"response\":\"request processed\"}", HttpStatus.OK );
+		return new ResponseEntity<String>("{\"response\":\"request not processed\"}", HttpStatus.NOT_ACCEPTABLE );
 	}
 }
