@@ -69,6 +69,9 @@ public class RESTController {
 		message.put( "kind", authenticationResponse.getBody().getObject().get( "kind" ) );
 		message.put( "kindCode", authenticationResponse.getBody().getObject().get( "kindCode" ) );
 		
+		message.put( "login", payload.get( "login" ) );
+		message.put( "password", payload.get( "password" ) );
+		
 		System.out.println( message );
 		
 		// Send the message to Apache Kafka | Database
