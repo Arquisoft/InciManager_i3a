@@ -1,0 +1,17 @@
+{
+  "name": "InciManager_i3a",
+  "description": "",
+  "scripts": {},
+  "env": {},
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "addons": [],
+  "buildpacks": [
+    {
+      "url": "heroku/java"
+    }
+  ]
+}
