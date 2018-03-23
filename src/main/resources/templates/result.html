@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8" />
+<!-- to use the latest rendering engine in case it doesn't-->
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+<!-- Adjusts the viewport and the scale of the browser -->
+<meta name="viewport" content="width = device-width, initial-scale = 1" />
+
+<!-- Bootstrap CDN in order to have support for Bootstrap's CSS and js -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous" />
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<!-- in order to include tether for BS 4 -->
+<script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+
+<link rel="stylesheet" href="signin.css" />
+<title>Login</title>
+
+</head>
+
+<body>
+
+	<!-- container class in order to tell BS to treat it as a container and it is usually container -->
+	<div class="container">
+		<h2>Incident Submitted</h2>
+		<h5 class="mb-1">Incident Name:</h5>
+		<ul class="list-group">
+			<li class="list-group-item"
+				th:text="${valuesMap.get('incidenceName')}"></li>
+		</ul>
+		<h5 class="mb-1">Description:</h5>
+		<ul class="list-group">
+			<li class="list-group-item" th:text="${valuesMap.get('description')}"></li>
+		</ul>
+		<h5 class="mb-1">Location:</h5>
+		<ul class="list-group">
+			<li class="list-group-item" th:text="${valuesMap.get('location')}"></li>
+		</ul>
+		<h5 class="mb-1">Asignee:</h5>
+		<ul class="list-group">
+			<li class="list-group-item" th:text="${valuesMap.get('asignee')}"></li>
+		</ul>
+		<h5 class="mb-1">Expiration:</h5>
+		<ul class="list-group">
+			<li class="list-group-item" th:text="${valuesMap.get('expiration')}"></li>
+		</ul>
+		<h5 class="mb-1">State:</h5>
+		<ul class="list-group">
+			<li class="list-group-item" th:text="${valuesMap.get('state')}"></li>
+		</ul>
+		<h5 class="mb-1">Multimedia:</h5>
+		<ul class="list-group">
+			<li class="list-group-item" th:each="media : ${valuesMap.get('additional_information')}" th:text="${media}"></li>
+		</ul>
+		<h5 class="mb-1">Tags:</h5>
+		<ul class="list-group">
+			<li class="list-group-item" th:each="tag : ${valuesMap.get('tags')}" th:text="${tag}"></li>
+		</ul>
+		<h5 class="mb-1">Properties:</h5>
+		<ul class="list-group">
+			<li class="list-group-item" th:each="prop : ${valuesMap.get('properties')}" th:text="${prop}"></li>
+		</ul>
+		<form action="/">
+			<div class="form-group">
+				<button type="submit" value="logout"
+					class="btn btn-block btn-primary btn-lg">Logout</button>
+			</div>
+		</form>
+		<form action="/incident">
+			<div class="form-group">
+				<button type="submit" value="logout"
+					class="btn btn-block btn-primary btn-lg">New Incident</button>
+			</div>
+		</form>
+	</div>
+
+</body>
+
+</html>
