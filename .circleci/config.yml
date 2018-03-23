@@ -22,7 +22,7 @@ jobs:
           command: sh kafka_2.11-0.11.0.1/bin/kafka-server-start.sh kafka_2.11-0.11.0.1/config/server.properties;
           background: true
       - run:
-          command: sh bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic INCIDENCES;
+          command: sh kafka_2.11-0.11.0.1/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic INCIDENCES;
           background: true
       - run:
           command: cd Agents_i3a-0.1/; mvn spring-boot:run;
@@ -49,6 +49,9 @@ jobs:
           background: true
       - run:
           command: sh kafka_2.11-0.11.0.1/bin/kafka-server-start.sh kafka_2.11-0.11.0.1/config/server.properties
+          background: true
+      - run:
+          command: sh kafka_2.11-0.11.0.1/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic INCIDENCES;
           background: true
       - run:
           command: cd Agents_i3a-0.1/; mvn spring-boot:run;
