@@ -88,28 +88,11 @@ public class KafkaServiceTest {
 		payload.remove("login");
 		Assert.assertFalse( kafka.sendIncidence(payload) );
 	}
-	@Test
-	public void testKafkaNoPassword()
-	{   
-		payload.remove("password");
-		Assert.assertFalse( kafka.sendIncidence(payload) );
-	}
-	@Test
-	public void testKafkaNoDescription()
-	{   
-		payload.remove("description");
-		Assert.assertFalse( kafka.sendIncidence(payload) );
-	}
+
 	@Test
 	public void testKafkaNoName()
 	{   
 		payload.remove("incidenceName");
-		Assert.assertFalse( kafka.sendIncidence(payload) );
-	}
-	@Test
-	public void testKafkaNoLocation()
-	{   
-		payload.remove("location");
 		Assert.assertFalse( kafka.sendIncidence(payload) );
 	}
 		
