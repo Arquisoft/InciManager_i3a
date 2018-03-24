@@ -40,20 +40,13 @@ public class KafkaService implements IKafkaService{
 		Map<String, Object> map;
 		map = new HashMap<String, Object>();
 		
-		//Chec
+		//Check non null mandatory fields.
 		if( payload.get("login") == null )
-			return false;
-		if( payload.get("password") == null )
 			return false;
 		if( payload.get("incidenceName") == null )
 			return false;
-		if( payload.get("description") == null )
-			return false;
-		if( payload.get("location") == null )
-			return false;
 		
 		//Set default state if none.
-		
 		if( payload.get("state") != null )
 			state = payload.get("state").toString();
 		
