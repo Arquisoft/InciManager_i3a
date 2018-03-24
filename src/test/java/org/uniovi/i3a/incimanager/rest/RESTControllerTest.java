@@ -57,7 +57,7 @@ public class RESTControllerTest {
 
 	@Test
 	public void restTest() throws Exception {
-		String payload = "{\"login\":\"45170000A\",\"password\":\"4[[j[frVCUMJ>hU\",\"kind\":1,\"message\":{\"name\":\"Fuego en coto carcedo\",\"description\":\"Hay un fuego que se ha iniciado cerca del monte. Peligro para la población cercana\",\"tags\":[\"la\",\"le\",\"li\",\"lo\"],\"multimedia\":[\"www.imagen1.com\",\"www.imagen2.com\",\"www.imagen3.com\",\"www.imagen4.com\"],\"property-val\":{\"prop1\":\"val1\",\"prop2\":\"val2\",\"prop3\":\"val3\",\"prop4\":\"val4\"},\"comments\":[\"Please help!\"]}}";
+		String payload = "{\"login\":\"45170000A\",\"password\":\"4[[j[frVCUMJ>hU\",\"kind\":1,\"message\":{\"incidenceName\":\"Fuego en coto carcedo\",\"description\":\"Hay un fuego que se ha iniciado cerca del monte. Peligro para la población cercana\",\"tags\":[\"la\",\"le\",\"li\",\"lo\"],\"multimedia\":[\"www.imagen1.com\",\"www.imagen2.com\",\"www.imagen3.com\",\"www.imagen4.com\"],\"property-val\":{\"prop1\":\"val1\",\"prop2\":\"val2\",\"prop3\":\"val3\",\"prop4\":\"val4\"},\"comments\":[\"Please help!\"]}}";
 
 		// We send a POST request to that URI (from http:localhost...)
 		MockHttpServletRequestBuilder request = post( "/sensor-feed" ).session( session )
