@@ -50,15 +50,13 @@ public class KafkaService implements IKafkaService{
 		if( payload.get("state") != null )
 			state = payload.get("state").toString();
 		
-		state = state.toUpperCase();
-		
 		//Store relevant information only
 		map.put("username", payload.get("login") );
 		map.put("password", payload.get("password") );
 		map.put("name", payload.get("incidenceName") );
 		map.put("description", payload.get("description"));
 		map.put("asignee", payload.get("asignee") );
-		map.put("state", state );
+		map.put("state", state.toUpperCase() );
 		map.put("expiration", payload.get("expiration"));
 		map.put("tags", payload.get("tags"));
 		map.put("multimedia", payload.get("additional_information"));
