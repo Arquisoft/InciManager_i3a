@@ -56,9 +56,9 @@ public class KafkaService implements IKafkaService{
 		map.put("name", payload.get("incidenceName") );
 		map.put("description", payload.get("description"));
 		map.put("asignee", payload.get("asignee") );
-		map.put("state", state );
+		map.put("state", state.toUpperCase() );
 		map.put("expiration", payload.get("expiration"));
-		map.put("tags", payload.get("location"));
+		map.put("tags", payload.get("tags"));
 		map.put("multimedia", payload.get("additional_information"));
 		map.put("property_value", payload.get("properties"));
 		map.put("location", payload.get("location"));
