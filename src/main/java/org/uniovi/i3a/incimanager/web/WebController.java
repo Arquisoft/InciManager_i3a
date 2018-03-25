@@ -92,14 +92,12 @@ public class WebController {
 		}
 		map.put("properties", propsList);
 		
-		/*if (kafkaService.sendIncidence(map)) {
+		if (kafkaService.sendIncidence(map)) {
 			model.addAttribute("valuesMap", map);
 			return "result";
 		}
 		
-		return "incident"*/
-		model.addAttribute("valuesMap", map);
-		return "result";
+		return "incidentForm";
 	}
 	
 	@RequestMapping(value = "/incident")
