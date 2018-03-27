@@ -9,7 +9,10 @@
  */
 package org.uniovi.i3a.incimanager.rest;
 
+//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+//import org.springframework.cloud.client.ServiceInstance;
+//import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.stereotype.Service;
 
 import com.mashape.unirest.http.HttpResponse;
@@ -26,20 +29,26 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 @Service
 public class AgentsConnection {
 
-	@Value("${agents.url}")
-	private String service_url;
+    // @Autowired
+    // private DiscoveryClient discoveryClient;
 
-	public HttpResponse<JsonNode> executeQuery(String query) {
-		try {
-			HttpResponse<JsonNode> jsonResponse = Unirest.post( service_url )
-					.header( "Content-Type", "application/json" )
-					.body( query )
-					.asJson();
-			return jsonResponse;
-		} catch (UnirestException e) {
-			e.printStackTrace();
-		}
-		return null;
+    @Value("${agents.url}")
+    private String service_url;
+
+    public HttpResponse<JsonNode> executeQuery(String query) {
+	try {
+	    // ServiceInstance instance = discoveryClient.getInstances("AGENTS").get(0);
+	    /*
+	     * if(instance == null) return null; String url =
+	     * instance.getHost()+":"+instance.getPort();
+	     */
+	    HttpResponse<JsonNode> jsonResponse = Unirest.post(service_url).header("Content-Type", "application/json")
+		    .body(query).asJson();
+	    return jsonResponse;
+	} catch (UnirestException e) {
+	    e.printStackTrace();
 	}
+	return null;
+    }
 
 }
