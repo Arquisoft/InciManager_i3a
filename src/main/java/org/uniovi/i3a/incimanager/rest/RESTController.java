@@ -14,6 +14,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -39,6 +41,9 @@ public class RESTController {
 	
 	@Autowired
 	AgentsConnection agentsConnection;
+	
+	@Autowired
+	private DiscoveryClient discoveryClient;
 	
 	@Autowired
 	IKafkaService kafkaService;
@@ -83,5 +88,16 @@ public class RESTController {
 		
 		// If all went OK return OK status.
 		return new ResponseEntity<String>("{\"response\":\"request not processed\"}", HttpStatus.NOT_ACCEPTABLE );
+	}
+	
+	@RequestMapping(value = "/info")
+	public ResponseEntity<String> instances() {
+	    StringBuilder sb = new StringBuilder();
+	    
+	    for(ServiceInstance instance : discoveryClient.getInstances("INCIDENT-MANAGER")) {
+		sb.append(instance.getServiceId()+"->"+instance.getHost());
+	    }
+	    
+	    return new ResponseEntity<String>(sb.toString(), HttpStatus.OK);
 	}
 }
