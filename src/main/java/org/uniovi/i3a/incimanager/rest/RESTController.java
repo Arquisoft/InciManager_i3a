@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.codehaus.jettison.json.JSONObject;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.http.HttpStatus;
@@ -92,6 +92,6 @@ public class RESTController {
 	payload.put("service-name", "agents-auth");
 	payload.put("service-description", "This service allows to perform the authentification of agents");
 
-	return new ResponseEntity<String>(new JSONObject(payload).toString(), HttpStatus.OK);
+	return new ResponseEntity<String>(new  JSONObject(payload).toString(), HttpStatus.OK);
     }
 }
