@@ -9,10 +9,10 @@
  */
 package org.uniovi.i3a.incimanager.rest;
 
-//import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-//import org.springframework.cloud.client.ServiceInstance;
-//import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.stereotype.Service;
 
 import com.mashape.unirest.http.HttpResponse;
@@ -29,20 +29,24 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 @Service
 public class AgentsConnection {
 
-    // @Autowired
-    // private DiscoveryClient discoveryClient;
+    @Autowired
+    private DiscoveryClient discoveryClient;
+    // https://agents-module.herokuapp.com/user
 
     @Value("${agents.url}")
     private String service_url;
 
     public HttpResponse<JsonNode> executeQuery(String query) {
 	try {
-	    // ServiceInstance instance = discoveryClient.getInstances("AGENTS").get(0);
-	    /*
-	     * if(instance == null) return null; String url =
-	     * instance.getHost()+":"+instance.getPort();
-	     */
-	    HttpResponse<JsonNode> jsonResponse = Unirest.post(service_url).header("Content-Type", "application/json")
+	    
+	    ServiceInstance instance = discoveryClient.getInstances("AGENTS-AUTH").get(0);
+
+	    if (instance == null)
+		return null;
+	    
+	    String url = instance.getHost() + "/user";
+	    
+	    HttpResponse<JsonNode> jsonResponse = Unirest.post(url).header("Content-Type", "application/json")
 		    .body(query).asJson();
 	    return jsonResponse;
 	} catch (UnirestException e) {
