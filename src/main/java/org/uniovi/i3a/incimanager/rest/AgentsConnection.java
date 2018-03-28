@@ -9,9 +9,7 @@
  */
 package org.uniovi.i3a.incimanager.rest;
 
-import java.util.List;
 
-import org.assertj.core.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -45,8 +43,7 @@ public class AgentsConnection {
     public HttpResponse<JsonNode> executeQuery(String query) {
 	try {
 	    
-	    List<Object> activeProfiles = Arrays.asList(env.getActiveProfiles());
-	    if(activeProfiles.contains("test")) {
+	    if(env.getActiveProfiles()[0].equals("test")) {
 		HttpResponse<JsonNode> jsonResponse = Unirest.post(service_url).header("Content-Type", "application/json")
 			    .body(query).asJson();
 		    return jsonResponse;
