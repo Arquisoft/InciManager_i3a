@@ -43,7 +43,7 @@ public class AgentsConnection {
     public HttpResponse<JsonNode> executeQuery(String query) {
 	try {
 	    
-	    if(env.getActiveProfiles()[0].equals("test")) {
+	    if(env.getActiveProfiles().length > 0 && env.getActiveProfiles()[0].equals("test")) {
 		HttpResponse<JsonNode> jsonResponse = Unirest.post(service_url).header("Content-Type", "application/json")
 			    .body(query).asJson();
 		    return jsonResponse;

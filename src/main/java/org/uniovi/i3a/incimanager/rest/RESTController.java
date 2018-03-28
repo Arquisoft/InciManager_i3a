@@ -89,8 +89,8 @@ public class RESTController {
     @RequestMapping(value = "/info")
     public ResponseEntity<String> instances() {
 	Map<String, String> payload = new HashMap<String, String>();
-	payload.put("service-name", "agents-auth");
-	payload.put("service-description", "This service allows to perform the authentification of agents");
+	payload.put("service-name", "incident-manager");
+	payload.put("service-description", "This service allows to create incidences");
 
 	return new ResponseEntity<String>(new  JSONObject(payload).toString(), HttpStatus.OK);
     }
