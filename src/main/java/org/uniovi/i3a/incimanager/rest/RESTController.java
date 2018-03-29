@@ -9,9 +9,11 @@
  */
 package org.uniovi.i3a.incimanager.rest;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.http.HttpStatus;
@@ -36,52 +38,60 @@ import lombok.extern.slf4j.Slf4j;
 @EntityScan
 @RestController
 public class RESTController {
-	
-	@Autowired
-	AgentsConnection agentsConnection;
-	
-	@Autowired
-	IKafkaService kafkaService;
 
-	@RequestMapping(value = "/sensor-feed", method = RequestMethod.POST, consumes = {
-			MediaType.APPLICATION_JSON_VALUE }, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> processSensorRequest( @RequestBody Map<String, Object> payload ) {
-		
-		// Authentication of the agent that made the request.
-		val authenticationResponse = agentsConnection.executeQuery( new AgentsQueryFormatter( payload ).query() );
-		
-		if(authenticationResponse.getStatus() != HttpStatus.OK.value()) {
-			log.warn( "[ERROR] UNAUTHORIZED ACCESS: trying to access as: "
-						+ payload.get( "login" ) + " "
-						+ payload.get( "password" ) + " "
-						+ payload.get( "kind" ));
-			
-			return new ResponseEntity<String>("{\"response\":\"UNAUTHORIZED ACCESS WILL BE REPORTED\"}", HttpStatus.UNAUTHORIZED );
-		}
-		
-		// Process the message in the request.
-		@SuppressWarnings({ "unchecked" })
-		val message = (LinkedHashMap<String, Object>) payload.get( "message" );
-		message.put( "name", authenticationResponse.getBody().getObject().get( "name" ) );
-		message.put( "location", authenticationResponse.getBody().getObject().get( "location" ) );
-		message.put( "email", authenticationResponse.getBody().getObject().get( "email" ) );
-		message.put( "id", authenticationResponse.getBody().getObject().get( "id" ) );
-		message.put( "kind", authenticationResponse.getBody().getObject().get( "kind" ) );
-		message.put( "kindCode", authenticationResponse.getBody().getObject().get( "kindCode" ) );
-		
-		message.put( "login", payload.get( "login" ) );
-		message.put( "password", payload.get( "password" ) );
-		
-		System.out.println( message );
-		
-		// Send the message to Apache Kafka | Database
-		// kafkaService.sendIncidence(message);
-		
-		if(kafkaService.sendIncidence( message )) {
-			return new ResponseEntity<String>("{\"response\":\"request processed\"}", HttpStatus.OK );
-		}
-		
-		// If all went OK return OK status.
-		return new ResponseEntity<String>("{\"response\":\"request not processed\"}", HttpStatus.NOT_ACCEPTABLE );
+    @Autowired
+    AgentsConnection agentsConnection;
+
+    @Autowired
+    IKafkaService kafkaService;
+
+    @RequestMapping(value = "/sensor-feed", method = RequestMethod.POST, consumes = {
+	    MediaType.APPLICATION_JSON_VALUE }, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> processSensorRequest(@RequestBody Map<String, Object> payload) {
+
+	// Authentication of the agent that made the request.
+	val authenticationResponse = agentsConnection.executeQuery(new AgentsQueryFormatter(payload).query());
+
+	if (authenticationResponse.getStatus() != HttpStatus.OK.value()) {
+	    log.warn("[ERROR] UNAUTHORIZED ACCESS: trying to access as: " + payload.get("login") + " "
+		    + payload.get("password") + " " + payload.get("kind"));
+
+	    return new ResponseEntity<String>("{\"response\":\"UNAUTHORIZED ACCESS WILL BE REPORTED\"}",
+		    HttpStatus.UNAUTHORIZED);
 	}
+
+	// Process the message in the request.
+	@SuppressWarnings({ "unchecked" })
+	val message = (LinkedHashMap<String, Object>) payload.get("message");
+	message.put("name", authenticationResponse.getBody().getObject().get("name"));
+	message.put("location", authenticationResponse.getBody().getObject().get("location"));
+	message.put("email", authenticationResponse.getBody().getObject().get("email"));
+	message.put("id", authenticationResponse.getBody().getObject().get("id"));
+	message.put("kind", authenticationResponse.getBody().getObject().get("kind"));
+	message.put("kindCode", authenticationResponse.getBody().getObject().get("kindCode"));
+
+	message.put("login", payload.get("login"));
+	message.put("password", payload.get("password"));
+
+	System.out.println(message);
+
+	// Send the message to Apache Kafka | Database
+	// kafkaService.sendIncidence(message);
+
+	if (kafkaService.sendIncidence(message)) {
+	    return new ResponseEntity<String>("{\"response\":\"request processed\"}", HttpStatus.OK);
+	}
+
+	// If all went OK return OK status.
+	return new ResponseEntity<String>("{\"response\":\"request not processed\"}", HttpStatus.NOT_ACCEPTABLE);
+    }
+
+    @RequestMapping(value = "/info")
+    public ResponseEntity<String> instances() {
+	Map<String, String> payload = new HashMap<String, String>();
+	payload.put("service-name", "incident-manager");
+	payload.put("service-description", "This service allows to create incidences");
+
+	return new ResponseEntity<String>(new  JSONObject(payload).toString(), HttpStatus.OK);
+    }
 }
