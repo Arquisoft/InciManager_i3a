@@ -4,6 +4,8 @@ defaults: &defaults
     - image: circleci/openjdk:8-jdk
   environment:
     MAVEN_OPTS: -Xmx3200m
+    EUREKA_URL: https://eureka-i3a.herokuapp.com/eureka/
+    DOMAIN_NAME: https://i3a-3.herokuapp.com
 
 version: 2
 jobs:
