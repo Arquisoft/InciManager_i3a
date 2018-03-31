@@ -29,6 +29,17 @@ body {
 	margin-top: 18px!important;
 }
 
+.hero-manager-logo {
+	height: 60px;
+	align-content: center;
+	text-align: center;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: -30px;
+	margin-bottom: 10px;
+}
+
 .hero-login-title {
 	margin: 0 0 10px;
 	text-align: center;
