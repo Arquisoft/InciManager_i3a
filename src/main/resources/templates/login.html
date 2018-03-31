@@ -30,6 +30,7 @@
 
 	<!-- container class in order to tell BS to treat it as a container and it is usually container -->
 	<div class="container">
+		<p class="hero-login-title">GestUsers: Manager</p>
 		<form action="/login" id="Datos" th:object="${UserInfo}"
 			class="form-signin" method="post">
 			<h1>Sign in</h1>
@@ -52,6 +53,11 @@
 			</div>
 			<button id="Enter" name="Enter" type="submit" value="enter"
 				class="hero-button btn btn-block">Login in to your agent account</button>
+			<div class="hero-legal-text-row">
+			<p>
+			You are about to login in a critical system application. Any unauthorized access will be reported to authorities.
+			</p>	
+			</div>
 		</form>
 
 	</div>

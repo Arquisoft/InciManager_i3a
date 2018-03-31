@@ -23,6 +23,21 @@ body {
     margin-bottom: 10px;
 }
 
+.hero-legal-text-row {
+	font-size: 12px!important;
+	line-height: 1.5!important;
+	margin-top: 18px!important;
+}
+
+.hero-login-title {
+	margin: 0 0 10px;
+	text-align: center;
+	font-size: 24px;
+	font-weight: 400;
+	margin-top: -20px;
+	margin-bottom: 20px
+}
+
 .login-title {
     text-align: center;
 }
