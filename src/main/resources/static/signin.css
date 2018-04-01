@@ -7,6 +7,21 @@ body {
     background-color: #fff;
 }
 
+.hero-blue {
+	background-color: rgb(35, 47, 62);
+	align-content: center;
+	color: #E47911;
+	display: block;
+	text-align: center;
+	font-size: 60px;
+	font-weight: 300;
+}
+
+b {
+	font-weight: 400;
+	font-size: 30px;
+}
+
 .form-signin {
     max-width: 330px;
 	padding-left: 15px;
