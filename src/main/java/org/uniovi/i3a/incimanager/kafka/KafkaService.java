@@ -62,8 +62,7 @@ public class KafkaService implements IKafkaService{
 		map.put("multimedia", payload.get("additional_information"));
 		map.put("property_value", payload.get("properties"));
 		map.put("location", payload.get("location"));
-		
-		
+
 		return send(TOPIC, new JSONObject(map).toString());
 		
 	}
@@ -82,6 +81,7 @@ public class KafkaService implements IKafkaService{
 			}
 		});
 		
+		//Lock threads.
 		try {
 			SendResult<String, String> result = future.get();
 			future.completable().complete(result);
