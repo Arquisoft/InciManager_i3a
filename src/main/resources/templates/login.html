@@ -22,36 +22,43 @@
 <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
 
 <link rel="stylesheet" href="signin.css" />
-<title>Login</title>
+<title>Incident Manager Sign in</title>
 
 </head>
 
 <body>
 
-	<!-- container class in order to tell BS to treat it as a container and it is usually container -->
+	<!-- container class in order to tell BS to treat it as a container and it is usually a container -->
 	<div class="container">
+		<img class="hero-manager-logo" src="img/inci-manager-logo.png" alt="gestusers-manager">
+		
 		<form action="/login" id="Datos" th:object="${UserInfo}"
 			class="form-signin" method="post">
-			<h2>Login</h2>
+			<h1>Sign in</h1>
 			<div class="form-group">
-				<label class="control-label col-sm-2" for="login">Username:</label>
-				<input id="login" name="login" type="text" class="form-control"
+				<label class="hero-label control-label col-sm-2" for="login">Username:</label>
+				<input id="login" name="login" type="text" class="hero-input form-control"
 					placeholder="Identifier" />
 			</div>
 			<div class="form-group">
-				<label class="control-label col-sm-2" for="password">Password:</label>
+				<label class="hero-label control-label col-sm-2" for="password">Password:</label>
 				<input id="password" name="password" type="password"
-					class="form-control" placeholder="Password" />
+					class="hero-input form-control" placeholder="Password" />
 			</div>
 			<div class="form-group">
-				<label class="control-label col-sm-2" for="kind">Kind:</label>
-				<select id="kind" name="kind" class="form-control">
+				<label class="hero-label control-label col-sm-2" for="kind">Kind of agent:</label>
+				<select id="kind" name="kind" class="hero-input form-control">
 					<option value="1">Person</option>
 					<option value="2">Entity</option>
 				</select>
 			</div>
 			<button id="Enter" name="Enter" type="submit" value="enter"
-				class="btn btn-block btn-primary btn-lg">Enter</button>
+				class="hero-button btn btn-block">Login in to your agent account</button>
+			<div class="hero-legal-text-row">
+			<p>
+			You are about to login in a critical system application. Any unauthorized access will be reported to authorities.
+			</p>	
+			</div>
 		</form>
 
 	</div>
