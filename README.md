@@ -6,7 +6,7 @@
 
 > **Atention**
 >
-> This module and [Module 2](https://github.com/Arquisoft/Agents_i3a) had been added to heroku Continuos Delivery, so you can test the application at https://mana-module.herokuapp.com for web services and https://mana-module.herokuapp.com/sensor-feed for REST services.
+> This module and [Module 2](https://github.com/Arquisoft/Agents_i3a) had been added to heroku Continuos Delivery, so you can test the application at https://i3a-3.herokuapp.com for web services and https://i3a-3.herokuapp.com/sensor-feed for REST services.
 
 This repository contains the incident manager module of the team I3A2. Developed during the 2018 Software Architecture course. This module is the incident management and queryes data from the Agents module, then sends it to the Dashboard. The big project consists on an incidence analysis system, composed of four modules:
 
