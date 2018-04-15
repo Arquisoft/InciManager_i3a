@@ -44,17 +44,18 @@ public class AgentsConnection {
 	try {
 	    
 	    if(env.getActiveProfiles().length > 0 && env.getActiveProfiles()[0].equals("test")) {
+		System.out.println("Profile: " + env.getActiveProfiles()[0]);
 		HttpResponse<JsonNode> jsonResponse = Unirest.post(service_url).header("Content-Type", "application/json")
 			    .body(query).asJson();
 		    return jsonResponse;
 	    }
 	    
-	    ServiceInstance instance = discoveryClient.getInstances("AGENTS-AUTH").get(0);
+	    ServiceInstance instance = discoveryClient.getInstances("AGENTS_SERVICE").get(0);
 
 	    if (instance == null)
 		return null;
 	    
-	    String url = instance.getHost() + "/user";
+	    String url = instance.getHost() + "/auth";
 	    
 	    
 	    HttpResponse<JsonNode> jsonResponse = Unirest.post(url).header("Content-Type", "application/json")
