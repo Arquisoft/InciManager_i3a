@@ -22,7 +22,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-import org.uniovi.i3a.incimanager.Application;
+import org.uniovi.i3a.incimanager.Service;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -35,7 +35,7 @@ import TestKit.IntegrationTest;
  * @author
  * @version
  */
-@SpringBootTest(classes = { Application.class })
+@SpringBootTest(classes = { Service.class })
 @RunWith(SpringJUnit4ClassRunner.class)
 @Category(IntegrationTest.class)
 @ActiveProfiles("test")

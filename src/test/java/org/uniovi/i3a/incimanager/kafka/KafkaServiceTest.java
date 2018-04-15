@@ -14,12 +14,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.uniovi.i3a.incimanager.Application;
+import org.uniovi.i3a.incimanager.Service;
 import org.uniovi.i3a.incimanager.kafka.wrongkafkadummy.WrongKafkaService;
 
 import TestKit.IntegrationTest;
 
-@SpringBootTest(classes = { Application.class})
+@SpringBootTest(classes = { Service.class})
 @RunWith(SpringJUnit4ClassRunner.class)
 @Category(IntegrationTest.class)
 @ActiveProfiles("test")
